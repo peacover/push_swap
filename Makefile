@@ -4,7 +4,7 @@ CC = gcc
 INC = -I ./
 SRCS =	./main.c \
 		./push_swap_utils.c 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror  -g
 OBJS = $(SRC:.c=.o)
 all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
@@ -12,7 +12,7 @@ $(NAME): $(OBJS) $(LIBFT)
 $(LIBFT):
 	@make -C ./Libft
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) *.dSYM
 	@make clean -C ./libft
 fclean: clean
 	@rm -f $(NAME)
