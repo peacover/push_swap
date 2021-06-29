@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:31 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/28 18:57:00 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/06/29 10:53:14 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	ft_putchar(char c);
 void	ft_putstr(char *s);
 int		ft_strlen_int(int *s);
 int		*ft_strdup_int(const int *s1);
+void	*ft_realloc_int(void *ptr, size_t old_size, size_t new_size);
+void	*ft_memcpy_int(void *dst, const void *src, size_t n);
+void	swap_a(t_infos *info);
+void	swap_b(t_infos *info);
+void	push_a(t_infos *info);
+void	push_b(t_infos *info);
 
 #endif
 

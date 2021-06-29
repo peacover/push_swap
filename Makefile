@@ -3,8 +3,9 @@ LIBFT =	Libft/libft.a
 CC = gcc
 INC = -I ./
 SRCS =	./main.c \
-		./push_swap_utils.c 
-FLAGS = -Wall -Wextra -Werror  -g
+		./push_swap_utils.c \
+		./operations.c
+FLAGS = -Wall -Wextra -Werror -fsanitize=address  -g
 OBJS = $(SRC:.c=.o)
 all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)

@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:27 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/28 18:39:31 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/06/29 11:59:24 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_strlen_int(int *s)
 	int i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i] != 0)
 		i++;
-	return (i);
+	return ((int)i);
 }
 
 int	*ft_strdup_int(const int *s1)
@@ -70,4 +70,46 @@ void	ft_putstr(char *s)
 		ft_putchar(s[i]);
 		i++;
 	}
+}
+
+void	*ft_memcpy_int(void *dst, const void *src, size_t n)
+{
+	int	*d;
+	int	*s;
+	size_t	i;
+
+	i = 0;
+	d = (int *)dst;
+	s = (int *)src;
+	if (d == NULL && s == NULL)
+		return (NULL);
+	while (n > i)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (d);
+}
+
+void	*ft_realloc_int(void *ptr, size_t old_size, size_t new_size)
+{
+	void	*new;
+	
+	if (new_size == 0)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	new = (int*)malloc(new_size * sizeof(int));
+	if (!new)
+		return (NULL);
+	if (ptr != NULL || !old_size)
+	{
+		if (old_size >= new_size)
+			ft_memcpy_int(new, ptr, new_size);
+		else
+			ft_memcpy_int(new, ptr, old_size);
+		free(ptr);
+	}
+	return (new);
 }

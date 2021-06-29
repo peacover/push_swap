@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:21 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/28 19:12:19 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/06/29 12:04:06 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	print_my_int_array(int *s)
 
 	i = 0;
 	printf("\n\n------------------------------------\n\n");
-	while (s[i])
+	printf("\n\n ft_strlen int = |%d|\n\n", ft_strlen_int(s));
+	while (i < 3 && s && s[i] != 0)
     {
 		printf("s[%d] : %d\n",i, s[i]);
 		i++;
@@ -77,7 +78,7 @@ void    fill_stack_a(t_infos *info, int argc, char **argv)
 		info->s_a[i] = ft_atoi(argv[i + 1]);
 		i++;
     }
-	info->s_a[i] = '\0';
+	info->s_a[i] = 0;
 	// i = 0;
 	// while (info->s_a[i])
     // {
@@ -151,11 +152,6 @@ void	init_infos(t_infos *info)
 	info->max_b = 0;
 }
 
-void	swap_a(t_infos *info)
-{
-		
-}
-
 int main(int argc, char **argv)
 {
     t_infos info;
@@ -166,6 +162,27 @@ int main(int argc, char **argv)
 	init_infos(&info);
     fill_stack_a(&info, argc, argv);
 	sort_check_double(&info);
-    printf("hello");
+	push_b(&info);
+	print_my_int_array(info.s_a);
+	// print_my_int_array(info.s_b);
+	// push_b(&info);
+	// print_my_int_array(info.s_a);
+	// print_my_int_array(info.s_b);
+	// push_b(&info);
+	// print_my_int_array(info.s_a);
+	// print_my_int_array(info.s_b);
+	// push_a(&info);
+	// print_my_int_array(info.s_a);
+	// print_my_int_array(info.s_b);
+	// push_a(&info);
+	// print_my_int_array(info.s_a);
+	// print_my_int_array(info.s_b);
+	// swap_a(&info);
+	// print_my_int_array(info.s_a);
+	// print_my_int_array(info.s_b);
+	// swap_b(&info);
+	// print_my_int_array(info.s_a);
+	// print_my_int_array(info.s_b);
+    // printf("hello");
 	// system("leaks push_swap");
 }
