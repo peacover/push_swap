@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:31 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/29 10:53:14 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/06/29 18:28:02 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct	s_infos
 {
 	int		*s_a;
 	int		*s_b;
+	int		l_a;
+	int		l_b;
 	int		*sorted_a;
 	int		*sorted_b;
 	int		mid_a;
@@ -35,14 +37,18 @@ typedef struct	s_infos
 int		ft_strlen2(char **w);
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
-int		ft_strlen_int(int *s);
-int		*ft_strdup_int(const int *s1);
+int		*ft_strdup_int(const int *s1, int len);
 void	*ft_realloc_int(void *ptr, size_t old_size, size_t new_size);
 void	*ft_memcpy_int(void *dst, const void *src, size_t n);
+void	print_my_int_array(int *s, int len);
 void	swap_a(t_infos *info);
 void	swap_b(t_infos *info);
 void	push_a(t_infos *info);
 void	push_b(t_infos *info);
+void	rotate_a(t_infos *info);
+void	rotate_b(t_infos *info);
+void	rev_rotate_a(t_infos *info);
+void	rev_rotate_a(t_infos *info);
 
 #endif
 

@@ -6,31 +6,24 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:27 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/29 11:59:24 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/06/29 17:24:06 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_strlen_int(int *s)
-{
-	int i;
 
-	i = 0;
-	while (s && s[i] != 0)
-		i++;
-	return ((int)i);
-}
-
-int	*ft_strdup_int(const int *s1)
+int	*ft_strdup_int(const int *s1, int len)
 {
 	int		i;
 	int		l;
 	int		*d;
 
 	i = 0;
-	l = ft_strlen_int((int*)s1);
-	d = (int *)malloc(sizeof(int) * (l + 1));
+	l = len;
+	if (len < 1)
+		return ((int*)s1);
+	d = (int *)malloc(sizeof(int) * (l));
 	if (!d)
 		return (NULL);
 	while (l > i)
@@ -38,7 +31,7 @@ int	*ft_strdup_int(const int *s1)
 		d[i] = s1[i];
 		i++;
 	}
-	d[i] = '\0';
+	// d[i] = '\0';
 	return (d);
 }
 

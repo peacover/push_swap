@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:21 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/29 12:04:06 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/06/29 18:26:05 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@ void    error_msg()
     ft_putstr_fd("Error\n", 1);
     exit(0);
 }
-void	print_my_int_array(int *s)
+void	print_my_int_array(int *s, int len)
 {
 	int i;
 
 	i = 0;
 	printf("\n\n------------------------------------\n\n");
-	printf("\n\n ft_strlen int = |%d|\n\n", ft_strlen_int(s));
-	while (i < 3 && s && s[i] != 0)
+	while (len > i)
     {
 		printf("s[%d] : %d\n",i, s[i]);
 		i++;
 	}
-	printf("\n\n------------------------------------\n\n");
+	printf("\n\n------------------------------------");
 }
 void    check_args(int argc, char **argv)
 {
@@ -72,13 +71,15 @@ void    fill_stack_a(t_infos *info, int argc, char **argv)
     int i;
     
     i = 0;
-	info->s_a = (int*)malloc((argc + 1) * sizeof(int));
+	info->s_a = (int*)malloc((argc)  * sizeof(int));
+	info->l_a = argc - 1;
     while (argc - 1 > i)
     {
 		info->s_a[i] = ft_atoi(argv[i + 1]);
 		i++;
     }
-	info->s_a[i] = 0;
+	// info->s_a[i] = 0;
+	
 	// i = 0;
 	// while (info->s_a[i])
     // {
@@ -87,7 +88,7 @@ void    fill_stack_a(t_infos *info, int argc, char **argv)
 	// }
 }
 
-int		*ft_sort(int *s)
+int		*ft_sort(int *s, int len)
 {
 	int i;
 	int j;
@@ -96,11 +97,11 @@ int		*ft_sort(int *s)
 	
 	i = 0;
 	j = 0;
-	ret = ft_strdup_int(s);
-	while (ret[i])
+	ret = ft_strdup_int(s, len);
+	while (len > i)
 	{
 		j = i + 1;
-		while (ret[j])
+		while (len > j)
 		{
 			if (ret[i] > ret[j])
 			{
@@ -112,6 +113,7 @@ int		*ft_sort(int *s)
 		}
 		i++;
 	}
+	// print_my_int_array(ret, len);
 	return (ret);
 }
 
@@ -122,12 +124,11 @@ void	sort_check_double(t_infos *info)
 
 	i = 0;
 	j = 0;
-	info->sorted_a = ft_sort(info->s_a);
-	info->mid_a = ft_strlen_int(info->s_a) / 2;
-	while (info->s_a[i])
+	info->sorted_a = ft_sort(info->s_a, info->l_a);
+	while (info->l_a > i)
 	{
 		j = i + 1;
-		while (info->s_a[j])
+		while (info->l_a > j)
 		{
 			if (info->s_a[i] == info->s_a[j])
 				error_msg();
@@ -150,6 +151,8 @@ void	init_infos(t_infos *info)
 	info->min_b = 0;
 	info->max_a = 0;
 	info->max_b = 0;
+	info->l_a = 0;
+	info->l_b = 0;
 }
 
 int main(int argc, char **argv)
@@ -162,27 +165,38 @@ int main(int argc, char **argv)
 	init_infos(&info);
     fill_stack_a(&info, argc, argv);
 	sort_check_double(&info);
-	push_b(&info);
-	print_my_int_array(info.s_a);
-	// print_my_int_array(info.s_b);
+	print_my_int_array(info.s_a, info.l_a);
+	print_my_int_array(info.s_b, info.l_b);
+	rotate_a(&info);
+	print_my_int_array(info.s_a, info.l_a);
+	print_my_int_array(info.s_b, info.l_b);
+	rev_rotate_a(&info);
+	print_my_int_array(info.s_a, info.l_a);
+	print_my_int_array(info.s_b, info.l_b);
 	// push_b(&info);
-	// print_my_int_array(info.s_a);
-	// print_my_int_array(info.s_b);
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
 	// push_b(&info);
-	// print_my_int_array(info.s_a);
-	// print_my_int_array(info.s_b);
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
+	// push_b(&info);
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
 	// push_a(&info);
-	// print_my_int_array(info.s_a);
-	// print_my_int_array(info.s_b);
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
 	// push_a(&info);
-	// print_my_int_array(info.s_a);
-	// print_my_int_array(info.s_b);
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
+	// push_a(&info);
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
 	// swap_a(&info);
-	// print_my_int_array(info.s_a);
-	// print_my_int_array(info.s_b);
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
 	// swap_b(&info);
-	// print_my_int_array(info.s_a);
-	// print_my_int_array(info.s_b);
-    // printf("hello");
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
+    printf("hello");
 	// system("leaks push_swap");
 }

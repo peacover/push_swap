@@ -5,7 +5,7 @@ INC = -I ./
 SRCS =	./main.c \
 		./push_swap_utils.c \
 		./operations.c
-FLAGS = -Wall -Wextra -Werror -fsanitize=address  -g
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 OBJS = $(SRC:.c=.o)
 all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
