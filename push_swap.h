@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:31 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/29 18:28:02 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/06/30 19:19:11 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	rev_rotate_a(t_infos *info);
 void	rev_rotate_a(t_infos *info);
 
 #endif
-
 // echo 'alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"' >> ~/.zshrc
 // source ~/.zshrc
 

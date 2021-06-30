@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:21 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/29 18:26:05 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:37:31 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,6 @@ void    fill_stack_a(t_infos *info, int argc, char **argv)
 		info->s_a[i] = ft_atoi(argv[i + 1]);
 		i++;
     }
-	// info->s_a[i] = 0;
-	
-	// i = 0;
-	// while (info->s_a[i])
-    // {
-	// 	printf("s[%d] : %d\n",i, info->s_a[i]);
-	// 	i++;
-	// }
 }
 
 int		*ft_sort(int *s, int len)
@@ -113,7 +105,6 @@ int		*ft_sort(int *s, int len)
 		}
 		i++;
 	}
-	// print_my_int_array(ret, len);
 	return (ret);
 }
 
@@ -137,6 +128,174 @@ void	sort_check_double(t_infos *info)
 		i++;
 	}
 	
+}
+
+int	check_if_sorted(int *s, int len)
+{
+	int i;
+
+	i = 0;
+	// print_my_int_array(s, len);
+	if (len == 0 || len == 1)
+		return (1);
+	while (len > i)
+	{
+		if (i == len - 1)
+			return (1);
+		if (s[i] > s[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+int	get_max(int *s, int len)
+{
+	int i;
+	int ret;
+
+	i = 0;
+	ret = s[0];
+	while (len > i)
+	{
+		if (s[i] > ret)
+			ret = s[i];
+		i++;
+	}
+	return (ret);
+}
+int	get_min(int *s, int len)
+{
+	int i;
+	int ret;
+
+	i = 0;
+	ret = s[0];
+	while (len > i)
+	{
+		if (s[i] < ret)
+			ret = s[i];
+		i++;
+	}
+	return (ret);
+}
+void	sort_three_nb_a(t_infos *info)
+{
+	int i;
+	int	min;
+	int max;
+	i = 0;
+	min = get_min(info->s_a, 3);
+	max = get_max(info->s_a, 3);
+	if (check_if_sorted(info->s_a, 3) == 1)
+		return;
+	if (info->s_a[0] == max)
+		rotate_a(info);
+	if (check_if_sorted(info->s_a, 3) == 1)
+		return;
+	if (info->s_a[2] == min)
+		rev_rotate_a(info);
+	if (check_if_sorted(info->s_a, 3) == 1)
+		return;
+	if (info->s_a[0] > info->s_a[1])
+		swap_a(info);
+	// if (check_if_sorted(info->s_a, 3) == 1)
+	// 	return;
+}
+
+int	get_pos(int *s, int val, int len)
+{
+	int i;
+
+	i = 0;
+	while (len > i)
+	{
+		if (s[i] == val)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+int	up_or_down(int pos, int len)
+{
+	if (len / 2 > pos)
+		return (1);
+	return (0);
+}
+
+void	sort_five_nb_a(t_infos *info)
+{
+	int i;
+	int	min;
+	int pos;
+	
+	i = 0;
+	min = get_min(info->s_a, info->l_a);
+	if (check_if_sorted(info->s_a, info->l_a) == 1)
+		return;
+	pos = get_pos(info->s_a, min, info->l_a);
+	if (pos == 0)
+	{
+		push_b(info);
+		min = get_min(info->s_a, info->l_a);
+		pos = get_pos(info->s_a, min, info->l_a);
+	}
+	else if (pos == info->l_a - 1)
+	{
+		rev_rotate_a(info);
+		push_b(info);
+		min = get_min(info->s_a, info->l_a);
+		pos = get_pos(info->s_a, min, info->l_a);
+	}
+	if (!up_or_down(pos, info->l_a))
+	{
+		while (pos > 0)
+		{
+			rotate_a(info);
+			pos--;
+		}// return 1 > down | 0 > up
+	}
+	else
+	{
+		while (pos < (info->l_a))
+		{
+			rev_rotate_a(info);
+			pos++;
+		}
+	}
+	push_b(info);
+	min = get_min(info->s_a, info->l_a);
+	pos = get_pos(info->s_a, min, info->l_a);
+	if (info->l_a > 3 && pos == 0)
+		push_b(info);
+	else if (info->l_a > 3 && pos == info->l_a - 1)
+	{
+		rev_rotate_a(info);
+		push_b(info);
+	}
+	min = get_min(info->s_a, info->l_a);
+	pos = get_pos(info->s_a, min, info->l_a);
+	if (info->l_a > 3 && !up_or_down(pos, info->l_a))
+	{
+		while (pos > 0)
+		{
+			rotate_a(info);
+			pos--;
+		}// return 1 > down | 0 > up
+	}
+	else if (info->l_a > 3)
+	{
+		while (pos < (info->l_a - 1))
+		{
+			rev_rotate_a(info);
+			pos++;
+		}
+	}
+	if (info->l_a > 3)
+		push_b(info);
+	sort_three_nb_a(info);
+	push_a(info);
+	push_a(info);
 }
 
 void	init_infos(t_infos *info)
@@ -165,15 +324,14 @@ int main(int argc, char **argv)
 	init_infos(&info);
     fill_stack_a(&info, argc, argv);
 	sort_check_double(&info);
-	print_my_int_array(info.s_a, info.l_a);
-	print_my_int_array(info.s_b, info.l_b);
-	rotate_a(&info);
-	print_my_int_array(info.s_a, info.l_a);
-	print_my_int_array(info.s_b, info.l_b);
-	rev_rotate_a(&info);
-	print_my_int_array(info.s_a, info.l_a);
-	print_my_int_array(info.s_b, info.l_b);
-	// push_b(&info);
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
+	// sort_three_nb_a(&info);
+	sort_five_nb_a(&info);
+	// rotate_a(&info);
+	// print_my_int_array(info.s_a, info.l_a);
+	// print_my_int_array(info.s_b, info.l_b);
+	// rev_rotate_a(&info);
 	// print_my_int_array(info.s_a, info.l_a);
 	// print_my_int_array(info.s_b, info.l_b);
 	// push_b(&info);
@@ -182,21 +340,9 @@ int main(int argc, char **argv)
 	// push_b(&info);
 	// print_my_int_array(info.s_a, info.l_a);
 	// print_my_int_array(info.s_b, info.l_b);
-	// push_a(&info);
+	// rotate_b(&info);
 	// print_my_int_array(info.s_a, info.l_a);
 	// print_my_int_array(info.s_b, info.l_b);
-	// push_a(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-	// push_a(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-	// swap_a(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-	// swap_b(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-    printf("hello");
+    // printf("hello");
 	// system("leaks push_swap");
 }
