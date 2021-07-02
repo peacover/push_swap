@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:21 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/30 20:37:31 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/07/02 19:46:43 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,23 +183,26 @@ void	sort_three_nb_a(t_infos *info)
 	int i;
 	int	min;
 	int max;
+	
 	i = 0;
-	min = get_min(info->s_a, 3);
-	max = get_max(info->s_a, 3);
-	if (check_if_sorted(info->s_a, 3) == 1)
+	min = get_min(info->s_a, info->l_a);
+	max = get_max(info->s_a, info->l_a);
+	if (check_if_sorted(info->s_a, info->l_a) == 1)
 		return;
 	if (info->s_a[0] == max)
 		rotate_a(info);
-	if (check_if_sorted(info->s_a, 3) == 1)
+	if (check_if_sorted(info->s_a, info->l_a) == 1)
 		return;
 	if (info->s_a[2] == min)
 		rev_rotate_a(info);
-	if (check_if_sorted(info->s_a, 3) == 1)
+	if (check_if_sorted(info->s_a, info->l_a) == 1)
+		return;
+	if (info->s_a[1] > info->s_a[2])
+		rev_rotate_a(info);
+	if (check_if_sorted(info->s_a, info->l_a) == 1)
 		return;
 	if (info->s_a[0] > info->s_a[1])
 		swap_a(info);
-	// if (check_if_sorted(info->s_a, 3) == 1)
-	// 	return;
 }
 
 int	get_pos(int *s, int val, int len)
@@ -218,7 +221,7 @@ int	get_pos(int *s, int val, int len)
 
 int	up_or_down(int pos, int len)
 {
-	if (len / 2 > pos)
+	if (len / 2 > pos + 1)
 		return (1);
 	return (0);
 }
@@ -303,15 +306,65 @@ void	init_infos(t_infos *info)
 	info->s_a = NULL;
 	info->s_b = NULL;
 	info->sorted_a = NULL;
-	info->sorted_b = NULL;
-	info->mid_a = 0;
-	info->mid_b = 0;
-	info->min_a = 0;
-	info->min_b = 0;
-	info->max_a = 0;
-	info->max_b = 0;
 	info->l_a = 0;
 	info->l_b = 0;
+}
+void	index_my_array(t_infos *info)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (info->l_a > i)
+	{
+		j = 0;
+		while (info->l_a > j)
+		{
+			if (info->s_a[i] == info->sorted_a[j])
+			{
+				info->s_a[i] = j;
+				break;
+			}
+			j++;
+		}
+		i++;
+	}
+	
+}
+
+void	sort_big_nbs(t_infos *info)
+{
+	int old_l_a;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	old_l_a = info->l_a;
+	index_my_array(info);
+	while (!check_if_sorted(info->s_a, info->l_a))
+	{
+		j = 0;
+		while (j < old_l_a)
+		{
+			if ((info->s_a[0] >> i)&1) // = 1
+				rotate_a(info);
+			else
+				push_b(info);
+			j++;
+		}
+		while (info->l_b != 0)
+			push_a(info);
+		i++;
+	}
+}
+
+void	ft_free(t_infos *info)
+{
+	free(info->sorted_a);
+	free(info->s_a);
+	free(info->s_b);
 }
 
 int main(int argc, char **argv)
@@ -320,29 +373,16 @@ int main(int argc, char **argv)
     
     if (argc < 2)
 		exit(0);
-    check_args(argc, argv);
 	init_infos(&info);
+    check_args(argc, argv);
     fill_stack_a(&info, argc, argv);
 	sort_check_double(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-	// sort_three_nb_a(&info);
-	sort_five_nb_a(&info);
-	// rotate_a(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-	// rev_rotate_a(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-	// push_b(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-	// push_b(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-	// rotate_b(&info);
-	// print_my_int_array(info.s_a, info.l_a);
-	// print_my_int_array(info.s_b, info.l_b);
-    // printf("hello");
+	if (info.l_a <= 3)
+		sort_three_nb_a(&info);
+	else if (info.l_a <= 5)
+		sort_five_nb_a(&info);
+	else if (info.l_a > 5)
+		sort_big_nbs(&info);
+	ft_free(&info);
 	// system("leaks push_swap");
 }

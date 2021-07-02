@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:31 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/30 19:19:11 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/07/02 19:27:57 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ typedef struct	s_infos
 	int		l_a;
 	int		l_b;
 	int		*sorted_a;
-	int		*sorted_b;
-	int		mid_a;
-	int		mid_b;
-	int		min_a;
-	int		min_b;
-	int		max_a;
-	int		max_b;
 }				t_infos;
 
 int		ft_strlen2(char **w);
@@ -49,6 +42,9 @@ void	rotate_a(t_infos *info);
 void	rotate_b(t_infos *info);
 void	rev_rotate_a(t_infos *info);
 void	rev_rotate_a(t_infos *info);
+void    check_args(int argc, char **argv);
+void    error_msg();
+void	sort_check_double(t_infos *info);
 
 #endif
 // echo 'alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"' >> ~/.zshrc
