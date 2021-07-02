@@ -3,14 +3,14 @@ NAME = push_swap
 LIBFT =	Libft/libft.a
 CC = gcc
 INC = -I ./
-SRCS =	./main.c \
-		./push_swap_utils.c \
+SRCS = 	./push_swap_utils.c \
 		./operations.c
 FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
-OBJS = $(SRC:.c=.o)
+OBJS = $(SRCS:.c=.o)
 all: $(NAME)
+	
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(FLAGS) $(INC) $(SRCS) -o $(NAME) $(LIBFT)
+	@$(CC) $(FLAGS) $(INC) $(SRCS) main.c -o $(NAME) $(LIBFT)
 $(LIBFT):
 	@make -C ./Libft
 clean:
@@ -20,4 +20,5 @@ fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C ./libft
 re : fclean $(NAME)
-# bonus : @$(CC) checker.c $(FLAGS) $(INC) -o $(CHECKER_NAME) $(LIBFT)
+bonus: fclean $(LIBFT)
+	gcc $(SRCS) checker.c $(FLAGS) $(INC) -o checker $(LIBFT)

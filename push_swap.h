@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:31 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/07/02 19:27:57 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/07/02 20:39:19 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ void	push_b(t_infos *info);
 void	rotate_a(t_infos *info);
 void	rotate_b(t_infos *info);
 void	rev_rotate_a(t_infos *info);
-void	rev_rotate_a(t_infos *info);
+void	rev_rotate_b(t_infos *info);
 void    check_args(int argc, char **argv);
 void    error_msg();
 void	sort_check_double(t_infos *info);
+int		check_if_sorted(int *s, int len);
+void	init_infos(t_infos *info);
+void    fill_stack_a(t_infos *info, int argc, char **argv);
 
 #endif
 // echo 'alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"' >> ~/.zshrc
