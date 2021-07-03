@@ -6,13 +6,13 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 09:56:54 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/06/30 15:59:00 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/07/03 10:02:20 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_a(t_infos *info)
+void	swap_a(t_infos *info, int t)
 {
 	int tmp;
 	
@@ -22,11 +22,12 @@ void	swap_a(t_infos *info)
 		tmp = info->s_a[0];
 		info->s_a[0] = info->s_a[1];
 		info->s_a[1] = tmp;
-		ft_putstr("sa\n");
+		if (!t)
+			ft_putstr("sa\n");
 	}
 }
 
-void	swap_b(t_infos *info)
+void	swap_b(t_infos *info, int t)
 {
 	int tmp;
 	
@@ -36,11 +37,12 @@ void	swap_b(t_infos *info)
 		tmp = info->s_b[0];
 		info->s_b[0] = info->s_b[1];
 		info->s_b[1] = tmp;
-		ft_putstr("sb\n");
+		if (!t)
+			ft_putstr("sb\n");
 	}
 }
 
-void	push_a(t_infos *info)
+void	push_a(t_infos *info, int t)
 {
 	int *tmp;
 	int i;
@@ -66,11 +68,12 @@ void	push_a(t_infos *info)
 		info->l_a++;
 		info->l_b--;
 		free(tmp);
-		ft_putstr("pa\n");
+		if (!t)
+			ft_putstr("pa\n");
 	}
 }
 
-void	push_b(t_infos *info)
+void	push_b(t_infos *info, int t)
 {
 	int *tmp;
 	int i;
@@ -96,11 +99,12 @@ void	push_b(t_infos *info)
 		info->l_a--;
 		info->l_b++;
 		free(tmp);
-		ft_putstr("pb\n");
+		if (!t)
+			ft_putstr("pb\n");
 	}
 }
 
-void	rotate_a(t_infos *info)
+void	rotate_a(t_infos *info, int t)
 {
 	int i;
 	int	tmp;
@@ -115,11 +119,12 @@ void	rotate_a(t_infos *info)
 			i++;
 		}
 		info->s_a[i] = tmp;
-		ft_putstr("ra\n");
+		if (!t)
+			ft_putstr("ra\n");
 	}
 }
 
-void	rotate_b(t_infos *info)
+void	rotate_b(t_infos *info, int t)
 {
 	int i;
 	int	tmp;
@@ -134,11 +139,12 @@ void	rotate_b(t_infos *info)
 			i++;
 		}
 		info->s_b[i] = tmp;
-		ft_putstr("rb\n");
+		if (!t)
+			ft_putstr("rb\n");
 	}
 }
 
-void	rev_rotate_a(t_infos *info)
+void	rev_rotate_a(t_infos *info, int t)
 {
 	int i;
 	int	tmp;
@@ -153,11 +159,12 @@ void	rev_rotate_a(t_infos *info)
 			i--;
 		}
 		info->s_a[i] = tmp;
-		ft_putstr("rra\n");
+		if (!t)
+			ft_putstr("rra\n");
 	}
 }
 
-void	rev_rotate_b(t_infos *info)
+void	rev_rotate_b(t_infos *info, int t)
 {
 	int i;
 	int	tmp;
@@ -172,6 +179,7 @@ void	rev_rotate_b(t_infos *info)
 			i--;
 		}
 		info->s_b[i] = tmp;
-		ft_putstr("rrb\n");
+		if (!t)
+			ft_putstr("rrb\n");
 	}
 }

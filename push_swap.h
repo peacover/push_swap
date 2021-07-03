@@ -6,7 +6,7 @@
 /*   By: yer-raki <yer-raki@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 10:06:31 by yer-raki          #+#    #+#             */
-/*   Updated: 2021/07/02 20:39:19 by yer-raki         ###   ########.fr       */
+/*   Updated: 2021/07/03 10:50:03 by yer-raki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,28 @@ typedef struct	s_infos
 	int		*sorted_a;
 }				t_infos;
 
-int		ft_strlen2(char **w);
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
 int		*ft_strdup_int(const int *s1, int len);
 void	*ft_realloc_int(void *ptr, size_t old_size, size_t new_size);
 void	*ft_memcpy_int(void *dst, const void *src, size_t n);
 void	print_my_int_array(int *s, int len);
-void	swap_a(t_infos *info);
-void	swap_b(t_infos *info);
-void	push_a(t_infos *info);
-void	push_b(t_infos *info);
-void	rotate_a(t_infos *info);
-void	rotate_b(t_infos *info);
-void	rev_rotate_a(t_infos *info);
-void	rev_rotate_b(t_infos *info);
+void	swap_a(t_infos *info, int t);
+void	swap_b(t_infos *info, int t);
+void	push_a(t_infos *info, int t);
+void	push_b(t_infos *info, int t);
+void	rotate_a(t_infos *info, int t);
+void	rotate_b(t_infos *info, int t);
+void	rev_rotate_a(t_infos *info, int t);
+void	rev_rotate_b(t_infos *info, int t);
 void    check_args(int argc, char **argv);
 void    error_msg();
 void	sort_check_double(t_infos *info);
 int		check_if_sorted(int *s, int len);
 void	init_infos(t_infos *info);
 void    fill_stack_a(t_infos *info, int argc, char **argv);
+void	ft_free(t_infos *info);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif
 // echo 'alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"' >> ~/.zshrc
